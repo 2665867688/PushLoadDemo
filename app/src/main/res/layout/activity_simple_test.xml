@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yue.pushload.activity.SimpleTestActivity">
+
+
+    <TextView
+        android:id="@+id/tv_simple_scroll"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/white"
+        android:text="滑动"/>
+    <Button
+        android:id="@+id/btn_simple_scrollto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="滑动01scrollto"/>
+    <Button
+        android:id="@+id/btn_simple_scrollby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="滑动01scrollby"/>
+
+    <Button
+        android:id="@+id/btn_simple_offset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="viewcom offset"/>
+
+    <Button
+        android:id="@+id/btn_simple_translate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="viewcom translate"/>
+
+
+</LinearLayout>

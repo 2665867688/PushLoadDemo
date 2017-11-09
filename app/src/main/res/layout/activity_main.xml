@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_main_simple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="初步试探 滑动" />
+
+        <Button
+            android:id="@+id/btn_main_simple02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="初步试探2 滑动" />
+
+        <Button
+            android:id="@+id/btn_main_simple03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="初步试探3 滑动" />
+
+        <Button
+            android:id="@+id/btn_main_simple04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="初步试探4 滑动" />
+
+        <Button
+            android:id="@+id/btn_main_simple05"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="view事件分发机制" />
+
+        <Button
+            android:id="@+id/btn_main_simple06"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="view事件分发机制02" />
+
+        <Button
+            android:id="@+id/btn_main_simple07"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="滑动冲突" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:padding="15dp"
+            android:text="第二篇开篇"/>
+        <Button
+            android:id="@+id/btn_main_layout01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="版本检测" />
+
+        <Button
+            android:id="@+id/btnmain_layout02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="继承view"/>
+        <Button
+            android:id="@+id/btnmain_layout03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="继承ViewGroup"/>
+        <Button
+            android:id="@+id/btnmain_layout04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下拉刷新"/>
+        <Button
+            android:id="@+id/btnmain_layout05"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="下拉刷新05"/>
+    </LinearLayout>
+</ScrollView>

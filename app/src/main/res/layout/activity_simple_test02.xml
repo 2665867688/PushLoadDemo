@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yue.pushload.activity.SimpleTest02Activity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="刷新" />
+
+
+        <RelativeLayout
+            android:id="@+id/layout_simple02"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="刷新"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_simple02_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="开始 滑动view本身" />
+
+                <Button
+                    android:id="@+id/btn_simple02_start02"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="开始 滑动view内容" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>
