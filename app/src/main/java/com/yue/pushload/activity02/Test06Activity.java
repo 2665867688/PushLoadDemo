@@ -7,6 +7,7 @@ import android.widget.ListView;
 import com.yue.pushload.R;
 import com.yue.pushload.Test06Adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +31,7 @@ public class Test06Activity extends AppCompatActivity {
 
     private void initView() {
         mListView = findViewById(R.id.listview_test06);
+        list = new ArrayList<>();
         mAdapter = new Test06Adapter(list);
     }
 
