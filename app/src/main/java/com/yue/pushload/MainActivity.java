@@ -17,6 +17,7 @@ import com.yue.pushload.activity02.Test02Activity;
 import com.yue.pushload.activity02.Test03Activity;
 import com.yue.pushload.activity02.Test04Activity;
 import com.yue.pushload.activity02.Test05Activity;
+import com.yue.pushload.activity02.Test06Activity;
 
 /**
  * @ClassName:MainActivity
@@ -120,6 +121,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Test05Activity.class));
+            }
+        });
+        findViewById(R.id.btn_main_layout06).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Test06Activity.class));
             }
         });
     }

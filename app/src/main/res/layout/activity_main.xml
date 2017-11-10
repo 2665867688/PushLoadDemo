@@ -83,6 +83,11 @@
             android:id="@+id/btnmain_layout05"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="下拉刷新05"/>
+            android:text="测试刷新加载各种情况类"/>
+        <Button
+            android:id="@+id/btn_main_layout06"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="刷新listView"/>
     </LinearLayout>
 </ScrollView>

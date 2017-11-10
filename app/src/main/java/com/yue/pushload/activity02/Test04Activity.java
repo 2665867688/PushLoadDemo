@@ -11,7 +11,7 @@ import com.yue.pushload.R;
  * @ClassName:Test04Activity
  * @auther:shimy
  * @date:2017/11/8 0008 下午 3:26
- * @description: 刷新 加载
+ * @description: 刷新 加载 参考资料 ：PullToRefreshLayout和smartRefreshLayout
  */
 public class Test04Activity extends AppCompatActivity {
 
