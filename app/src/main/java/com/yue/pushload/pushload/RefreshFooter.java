@@ -12,7 +12,15 @@ public interface RefreshFooter {
 
     /**
      * 其实不需要继承此方法的，但当继承viewgroup自定义时就需要这个方法，因为要addView()
+     *
      * @return
      */
     View getView();
+
+    /**
+     *
+     * @param oldState 上一个状态
+     * @param newState 新的状态
+     */
+    void onStateChanged(RefreshState oldState, RefreshState newState);
 }

@@ -19,21 +19,9 @@ import java.util.logging.Handler;
  */
 
 public class PushLoadLayout extends RelativeLayout {
+    private RefreshState refreshState = RefreshState.None;//刷新状态
 
-    // 初始状态
-    public static final int INIT = 0;
-    // 释放刷新
-    public static final int RELEASE_TO_REFRESH = 1;
-    // 正在刷新
-    public static final int REFRESHING = 2;
-    // 释放加载
-    public static final int RELEASE_TO_LOAD = 3;
-    // 正在加载
-    public static final int LOADING = 4;
-    // 操作完毕
-    public static final int DONE = 5;
-    // 当前状态
-    private int state = INIT;
+
     /**
      * 手指按下是的触控坐标
      */
@@ -52,11 +40,6 @@ public class PushLoadLayout extends RelativeLayout {
     private Scroller mScroller;
     //计算速度
     private VelocityTracker mVelocityTracker;
-
-    /**
-     * handler 发送消息 暂时用不到
-     */
-    private Handler mHandler;
     /**
      * 下拉头部视图
      */
@@ -103,6 +86,8 @@ public class PushLoadLayout extends RelativeLayout {
      * 加载更多的接口
      */
     private OnLoadmoreListener onLoadmoreListener;
+
+    private boolean mRefreshing = false;
 
 
     public PushLoadLayout(Context context) {
@@ -192,6 +177,7 @@ public class PushLoadLayout extends RelativeLayout {
                     if (mRefreshContent.canPullDown()) {
                         //下拉状态
                         if (Math.abs(getScrollY()) < maxDistance) {
+                            setStatePullDownToRefresh();
                             //可以刷新
                             pullDownY = (ev.getY() - mLastY) / radio;
 
@@ -217,8 +203,21 @@ public class PushLoadLayout extends RelativeLayout {
 //                smoothScrollBy(0, -pullDownY);
                 break;
             case MotionEvent.ACTION_UP:
+                if (mEvents == 0) {
+                    if (getScrollY() < 0) {
+                        refreshState = RefreshState.RefreshReleased;
+                        setStatePullDownToRefresh();
+                    } else {
+                        refreshState = RefreshState.LoadReleased;
+                    }
+                } else {
+                    mEvents = 0;
+                }
                 //弹性回弹
-                smoothScrollBy(0, -getScrollY());
+                smoothScrollBy(0, -getScrollY() - mRefreshHeader.getView().getMeasuredHeight());
+                break;
+            case MotionEvent.ACTION_CANCEL://事件取消
+
                 break;
 
 
@@ -228,6 +227,27 @@ public class PushLoadLayout extends RelativeLayout {
         //使用父类继续分发事件
         return super.dispatchTouchEvent(ev);
     }
+
+
+    protected void setStatePullDownToRefresh() {
+        if (refreshState != RefreshState.Refreshing
+                && refreshState != RefreshState.RefreshReleased
+                && Math.abs(getScrollY()) > mRefreshHeader.getView().getMeasuredHeight()
+                && (refreshState == RefreshState.PullDownToRefresh||refreshState == RefreshState.None)) {
+            mRefreshHeader.onStateChanged(refreshState, RefreshState.ReleaseToRefresh);
+            refreshState = RefreshState.ReleaseToRefresh;
+        } else if (refreshState != RefreshState.Refreshing
+                && refreshState != RefreshState.RefreshReleased
+                && Math.abs(getScrollY()) < (mRefreshHeader.getView().getMeasuredHeight()-10)
+                && (refreshState == RefreshState.ReleaseToRefresh||refreshState == RefreshState.None)) {
+            mRefreshHeader.onStateChanged(refreshState, RefreshState.PullDownToRefresh);
+            refreshState = RefreshState.PullDownToRefresh;
+        } else if (refreshState == RefreshState.RefreshReleased) {
+            mRefreshHeader.onStateChanged(refreshState, RefreshState.RefreshReleased);
+            refreshState = RefreshState.Refreshing;
+        }
+    }
+
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -282,5 +302,9 @@ public class PushLoadLayout extends RelativeLayout {
 
     public void setOnLoadmoreListener(OnLoadmoreListener onLoadmoreListener) {
         this.onLoadmoreListener = onLoadmoreListener;
+    }
+
+    public void setRefreshing(boolean refreshing) {
+        mRefreshing = refreshing;
     }
 }

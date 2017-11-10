@@ -2,6 +2,8 @@ package com.yue.pushload.header;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -13,7 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yue.pushload.R;
+import com.yue.pushload.pushload.ProgressDrawable;
 import com.yue.pushload.pushload.RefreshHeader;
+import com.yue.pushload.pushload.RefreshState;
 import com.yue.pushload.utils.DensityUtil;
 
 import java.text.DateFormat;
@@ -44,9 +48,10 @@ public class TestHeader extends RelativeLayout implements RefreshHeader {
 
     protected TextView mTitleText;
     protected TextView mLastUpdateText;
-    protected ImageView mArrowView;
-    protected ImageView mProgressView;
+    protected ImageView mArrowView;//箭头
+    protected ImageView mProgressView;//progressview
     protected DateFormat mFormat = new SimpleDateFormat(REFRESH_HEADER_LASTTIME, Locale.CHINA);
+    protected ProgressDrawable mProgressDrawable;
 
     public TestHeader(Context context) {
         super(context);
@@ -63,10 +68,6 @@ public class TestHeader extends RelativeLayout implements RefreshHeader {
         initView(context);
     }
 
-    @Override
-    public View getView() {
-        return this;
-    }
 
     private void initView(Context context) {
         DensityUtil density = new DensityUtil();
@@ -102,6 +103,7 @@ public class TestHeader extends RelativeLayout implements RefreshHeader {
         lpProgress.addRule(CENTER_VERTICAL);
         lpProgress.addRule(LEFT_OF, android.R.id.widget_frame);
         mProgressView = new ImageView(context);
+        mProgressView.setImageResource(R.drawable.ic_progress_hojder);
         mProgressView.animate().setInterpolator(new LinearInterpolator());
         addView(mProgressView, lpProgress);
 
@@ -110,6 +112,67 @@ public class TestHeader extends RelativeLayout implements RefreshHeader {
             mTitleText.setText(REFRESH_HEADER_REFRESHING);
         } else {
             mProgressView.setVisibility(GONE);
+        }
+    }
+
+    @Override
+    public View getView() {
+        return this;
+    }
+
+
+    /**
+     * 状态改变
+     *
+     * @param oldState 上一个状态
+     * @param newState 新的状态
+     */
+    @Override
+    public void onStateChanged(RefreshState oldState, RefreshState newState) {
+        switch (newState) {
+            case None://无状态
+
+                break;
+            case PullDownToRefresh://下拉到刷新
+                mTitleText.setText(REFRESH_HEADER_PULLDOWN);
+                mArrowView.setVisibility(VISIBLE);
+                mProgressView.setVisibility(GONE);
+                mArrowView.animate().rotation(0);
+                break;
+            case ReleaseToRefresh://释放到刷新
+                mTitleText.setText(REFRESH_HEADER_RELEASE);
+                mArrowView.setVisibility(VISIBLE);
+                mProgressView.setVisibility(GONE);
+                mArrowView.animate().rotation(180);
+                break;
+            case Refreshing://刷新中
+            case RefreshReleased://刷新释放
+                mTitleText.setText(REFRESH_HEADER_REFRESHING);
+                mProgressView.setVisibility(VISIBLE);
+                mArrowView.setVisibility(GONE);
+                onRefreshReleased();
+                break;
+
+            case Loading://加载中
+
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
+    public void onRefreshReleased() {
+        if (mProgressDrawable != null) {
+            mProgressDrawable.start();
+        } else {
+            Drawable drawable = mProgressView.getDrawable();
+            if (drawable instanceof Animatable) {
+                ((Animatable) drawable).start();
+            } else {
+                mProgressView.animate().rotation(36000).setDuration(100000);
+            }
         }
     }
 }

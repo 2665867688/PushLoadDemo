@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.yue.pushload.pushload.ProgressDrawable;
 import com.yue.pushload.pushload.RefreshFooter;
+import com.yue.pushload.pushload.RefreshState;
 import com.yue.pushload.utils.DensityUtil;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -86,5 +87,15 @@ public class TestFooter extends RelativeLayout implements RefreshFooter {
     @Override
     public View getView() {
         return this;
+    }
+
+    /**
+     * 状态改变时
+     * @param oldState 上一个状态
+     * @param newState 新的状态
+     */
+    @Override
+    public void onStateChanged(RefreshState oldState, RefreshState newState) {
+
     }
 }
