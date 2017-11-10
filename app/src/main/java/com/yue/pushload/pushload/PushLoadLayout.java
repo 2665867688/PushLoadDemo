@@ -238,7 +238,7 @@ public class PushLoadLayout extends RelativeLayout {
             refreshState = RefreshState.ReleaseToRefresh;
         } else if (refreshState != RefreshState.Refreshing
                 && refreshState != RefreshState.RefreshReleased
-                && Math.abs(getScrollY()) < (mRefreshHeader.getView().getMeasuredHeight()-10)
+                && Math.abs(getScrollY()) <= (mRefreshHeader.getView().getMeasuredHeight())
                 && (refreshState == RefreshState.ReleaseToRefresh||refreshState == RefreshState.None)) {
             mRefreshHeader.onStateChanged(refreshState, RefreshState.PullDownToRefresh);
             refreshState = RefreshState.PullDownToRefresh;
@@ -248,6 +248,10 @@ public class PushLoadLayout extends RelativeLayout {
         }
     }
 
+
+    protected void setStatePullUpToLoad(){
+
+    }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
