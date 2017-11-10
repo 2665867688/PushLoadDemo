@@ -90,11 +90,20 @@ public class PushLoadLayout extends RelativeLayout {
     private float radio = 2;
 
     /**
-     * 最大拖动距离
+     * 最大拖动距离,实际应用为了更好的效果 要根据头尾的大小来计算出此值的大小
      */
     private int maxDistance = 500;
 
-    private float headerFirstHeight = 0;
+    /**
+     * 刷新的接口
+     */
+    private OnRefreshListener onRefreshListener;
+
+    /**
+     * 加载更多的接口
+     */
+    private OnLoadmoreListener onLoadmoreListener;
+
 
     public PushLoadLayout(Context context) {
         super(context);
@@ -180,7 +189,7 @@ public class PushLoadLayout extends RelativeLayout {
                 }
 
                 if (mEvents == 0) {
-                    if (mRefreshContent.canPullDown() ) {
+                    if (mRefreshContent.canPullDown()) {
                         //下拉状态
                         if (Math.abs(getScrollY()) < maxDistance) {
                             //可以刷新
@@ -193,8 +202,9 @@ public class PushLoadLayout extends RelativeLayout {
                             scrollBy(0, (int) -pullDownY);
                             mRefreshHeader.getView().requestLayout();
                         }
-                    }else if (mRefreshContent.canPullUp()){
-                        pullUpY = (ev.getY() - mLastY)/radio;
+                    } else if (mRefreshContent.canPullUp()) {
+                        //上啦加载
+                        pullUpY = (ev.getY() - mLastY) / radio;
                         scrollBy(0, (int) -pullUpY);
                         mRefreshFooter.getView().requestLayout();
                     }
@@ -236,10 +246,10 @@ public class PushLoadLayout extends RelativeLayout {
         if (mRefreshFooter != null) {
             int parentHeight = getMeasuredHeight();
             View footerView = mRefreshFooter.getView();
-            Log.d("PushLoadLayout","parentHeight:"+parentHeight);
+            Log.d("PushLoadLayout", "parentHeight:" + parentHeight);
             int height = footerView.getMeasuredHeight();
             float mscrolly = Math.abs(getScrollY());
-            footerView.layout(0, parentHeight,footerView.getMeasuredWidth(),(int) (parentHeight+height+mscrolly));
+            footerView.layout(0, parentHeight, footerView.getMeasuredWidth(), (int) (parentHeight + height + mscrolly));
         }
     }
 
@@ -264,5 +274,13 @@ public class PushLoadLayout extends RelativeLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 //        mVelocityTracker.recycle();
+    }
+
+    public void setOnRefreshListener(OnRefreshListener onRefreshListener) {
+        this.onRefreshListener = onRefreshListener;
+    }
+
+    public void setOnLoadmoreListener(OnLoadmoreListener onLoadmoreListener) {
+        this.onLoadmoreListener = onLoadmoreListener;
     }
 }

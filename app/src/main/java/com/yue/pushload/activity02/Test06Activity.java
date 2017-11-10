@@ -33,6 +33,8 @@ public class Test06Activity extends AppCompatActivity {
         mListView = findViewById(R.id.listview_test06);
         list = new ArrayList<>();
         mAdapter = new Test06Adapter(list);
+        mListView.setAdapter(mAdapter);
+        refreshData();
     }
 
 

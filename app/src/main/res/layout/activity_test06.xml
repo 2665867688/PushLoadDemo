@@ -10,23 +10,21 @@
     <com.yue.pushload.pushload.PushLoadLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <com.yue.pushload.header.TestHeader
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimary" />
 
         <com.yue.pushload.pushload.RefreshListView
             android:id="@+id/listview_test06"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <com.yue.pushload.footer.TestFooter
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@color/colorPrimary"/>
-
-
-
+            android:background="@color/colorPrimary" />
 
     </com.yue.pushload.pushload.PushLoadLayout>
 
