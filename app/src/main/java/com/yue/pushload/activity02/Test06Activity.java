@@ -43,7 +43,7 @@ public class Test06Activity extends AppCompatActivity {
      */
     private void refreshData() {
         list.clear();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 40; i++) {
             list.add("刷新哈哈哈");
         }
         mAdapter.notifyDataSetChanged();

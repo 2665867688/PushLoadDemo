@@ -27,8 +27,8 @@ public class Test05Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i+=10;
-                layout.layout(0,btn.getMeasuredHeight(),layout.getMeasuredWidth(),btn.getMeasuredHeight()+layout.getMeasuredHeight()+i);
-                layout.scrollTo(0,-i);
+//                layout.layout(0,btn.getMeasuredHeight()+i,layout.getMeasuredWidth(),btn.getMeasuredHeight()+layout.getMeasuredHeight()+i);
+                layout.scrollTo(i,0);
             }
         });
 
@@ -36,6 +36,13 @@ public class Test05Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mImgRotate.animate().rotation(180);
+            }
+        });
+
+        findViewById(R.id.btn_test05_setscroll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                layout.setScrollX(0);
             }
         });
     }

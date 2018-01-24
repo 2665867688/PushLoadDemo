@@ -255,6 +255,7 @@ public class PushLoadLayout extends RelativeLayout {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        Log.i("PushLoadLayout","onLayout");
         if (mRefreshHeader != null) {
             View headerView = mRefreshHeader.getView();
             int height = headerView.getMeasuredHeight();
